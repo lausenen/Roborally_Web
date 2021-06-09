@@ -7,6 +7,8 @@ import com.example.demo.model.Board;
 public interface IBoardDao {
     Board getBoard(int boardId) throws DaoException;
 
+    Board[] getBoards() throws DaoException;
+
     int createBoard(Board board) throws DaoException;
 
     void updateBoard(Board board, int boardId) throws DaoException;

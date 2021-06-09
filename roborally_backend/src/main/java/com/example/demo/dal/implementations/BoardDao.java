@@ -21,6 +21,11 @@ public class BoardDao implements IBoardDao {
     }
 
     @Override
+    public Board[] getBoards() {
+        return boards.values().toArray(new Board[10]);
+    }
+
+    @Override
     public int createBoard(Board board) {
         boardIdCounter++;
         board.setGameId(boardIdCounter);
