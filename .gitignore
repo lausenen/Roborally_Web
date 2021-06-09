@@ -1,0 +1,3 @@
+# Project exclude paths
+/roborally_backend/target/
+/roborally_frontend/node_modules/
