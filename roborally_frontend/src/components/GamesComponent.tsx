@@ -9,12 +9,16 @@ const GamesComponent: FunctionComponent<GamesComponentProps> = () => {
     const {games, loaded} = useContext(GameContext)
 
     return (
-        !loaded ? <div>{ games.map((game,index) =>
-        <GameComponent key={"game" + index} game={game}/>
-
-            )
-            }
-        </div>
+        !loaded ?
+            <div>
+                {games.map((game, index) =>
+                    <div>
+                        <GameComponent key={"game" + index} game={game}/>
+                        <p/>&nbsp;<p/>
+                    </div>
+                )
+                }
+            </div>
             :
             <div/>
     )
