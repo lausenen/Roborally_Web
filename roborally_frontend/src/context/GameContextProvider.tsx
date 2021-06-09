@@ -98,7 +98,6 @@ const GameContextProvider = ({children}: GameContextProviderPropsType) => {
     }, [currentPlayerIndex, gameId, playerCount, players])
 
     const selectGame = useCallback(async (game: Game) => {
-        if (game.started) {
             GameApi.getBoard(game.gameId).then(board => {
                 if (board.playerDtos.length > 0) {
                     setSpaces(board.spaceDtos)
@@ -120,7 +119,7 @@ const GameContextProvider = ({children}: GameContextProviderPropsType) => {
             }).catch(() => {
                 console.error("Error while fetching board from backend")
             })
-        }
+
     }, [])
 
     const unselectGame = useCallback(async () => {
@@ -142,6 +141,7 @@ const GameContextProvider = ({children}: GameContextProviderPropsType) => {
 
 useEffect( () =>{
     const interval = setInterval(async () =>{
+        //setGames(GameApi.getGames()) not needed now since this is static
         if(loaded && gameId >= 0){
             GameApi.getBoard(gameId).then(board => {
                 if(gameId === board.boardId){

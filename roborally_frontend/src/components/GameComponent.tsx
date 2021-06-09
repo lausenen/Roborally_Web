@@ -7,7 +7,7 @@ export type GameComponentProps = {
     game : Game
 }
 
-export const GameComponent: FunctionComponent<GameComponentProps> = ({game}) => {
+export const GameComponent: ({game}: { game: any }) => void = ({game}) => {
     const {selectGame} = useContext(GameContext)
 
     const onClickGame = async () => {
@@ -20,12 +20,12 @@ export const GameComponent: FunctionComponent<GameComponentProps> = ({game}) => 
     }
 
     const[edit, setEdit] = useState(false)
-    const[name, setName] = useState(game.name)
+    const[name, setName] = useState(game.boardName)
 
 
-    const onChange = (React.ChangeEvent<HTMLInputElement>)=>{
+    const onChange = (React.ChangeEvent<HTMLInputElement>) =>{
         setName(event.target.value)
-        console.log("Game name: " + game.name + "; new name:" + name)
+        console.log("Game name: " + game.boardName + "; new name:" + name)
     }
 
     const onSubmit = (React.FormEvent<HTMLFormElement>)=>{

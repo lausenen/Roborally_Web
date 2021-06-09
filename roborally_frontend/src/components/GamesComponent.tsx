@@ -8,6 +8,7 @@ const GamesComponent: FunctionComponent<GamesComponentProps> = () => {
 
     const {games, loaded} = useContext(GameContext)
 
+
     return (
         !loaded ?
             <div>

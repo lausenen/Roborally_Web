@@ -26,8 +26,12 @@ class GameApi{
         return axios.put(`${this.BACKEND_URL}/board/${boardId}/switchplayer`)
     }
 
-    public getGames(boardID : number){
-        //need code
+    public getGames(boardID : number, playerDTos : player){
+        //return axios.get(`${this.BACKEND_URL}/board/${boardID}/code here i think`)
+    }
+
+    public addPlayer(boardID : number, playerDTos : player){
+        return axios.get(`${this.BACKEND_URL}/board/${boardID}/addPlayer`)
     }
 }
 
