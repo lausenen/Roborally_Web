@@ -12,7 +12,6 @@ const GamesComponent: FunctionComponent<GamesComponentProps> = () => {
     return (
         !loaded ?
             <div className={styles.container}>
-                <p>Hello!</p>
                 <div>{ games.map((game,index) =>
         <GameComponent key={"game" + index} game={game}/>
 

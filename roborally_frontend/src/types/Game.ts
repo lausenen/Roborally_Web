@@ -1,8 +1,8 @@
 import {User} from "./User";
 
 export type Game = {
-    gameId: number,
-    boardName: string,
+    name: string,
+    id: number,
     started: boolean,
     users: User[]
 }

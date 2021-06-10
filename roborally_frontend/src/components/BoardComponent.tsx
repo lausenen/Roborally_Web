@@ -11,7 +11,11 @@ type BoardComponentProps = {}
 const BoardComponent: FunctionComponent<BoardComponentProps> = () => {
     //{...} context is known as object destructuring
     const {board, loaded} = useContext(GameContext) //Hook form of Context.Consumer, used to access the context
+    const {unselectGame} = useContext(GameContext)
 
+    const onClickGame = async () => {
+        unselectGame()
+    }
     return (
         /*Apply css on div below*/
         <div className={styles.container}>
@@ -36,6 +40,7 @@ const BoardComponent: FunctionComponent<BoardComponentProps> = () => {
             */}
             {loaded ? (
 
+
                 board.spaceDtos.map((spaceArray, index) =>
                     <div key={"spaceArray" + index}>
                         {
@@ -44,7 +49,7 @@ const BoardComponent: FunctionComponent<BoardComponentProps> = () => {
                     </div>
                 )
 
-            ) : <h1>loading...</h1>}
+            ) : <div/>}
 
 
         </div>
