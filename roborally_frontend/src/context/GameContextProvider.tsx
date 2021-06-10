@@ -13,8 +13,12 @@ type GameContextProviderPropsType = {
 
 const GameContextProvider = ({children}: GameContextProviderPropsType) => {
     const [loaded, setLoaded] = useState<boolean>(false)
+    const [gameId, setGameId] = useState<number>(0)
     useEffect(() => {
-        GameApi.getBoard(1).then(board => {
+        if(loaded && gameId >= 0){
+        GameApi.getBoard(gameId).then(board => {
+            if(gameId === board.boardId){
+
             setSpaces(board.spaceDtos)
             setPlayers(board.playerDtos)
             setWidth(board.width)
@@ -28,13 +32,20 @@ const GameContextProvider = ({children}: GameContextProviderPropsType) => {
                         setCurrentPlayerIndex(index)
                     }
                 })
-
+            } else  {
+                console.error("Game doens't match board")
             }
 
-            setLoaded(true)
+            }
         }).catch(() => {
             console.error("Error while fetching board from backend")
         })
+        }
+        else {
+            GameApi.getGames().then(games => {
+                setGames(games)
+            }).catch(() => {console.error("Games could not be loaded")})
+        }
     }, [])
     //The code below is executed when the provider is rendered (inside App.tsx)
     //The code should fetch the data from the API instead of using a static assignment
@@ -49,7 +60,6 @@ const GameContextProvider = ({children}: GameContextProviderPropsType) => {
     const [spaces, setSpaces] = useState<Space[][]>([])
     const [width, setWidth] = useState<number>(0)
     const [height, setHeight] = useState<number>(0)
-    const [gameId, setGameId] = useState<number>(0)
     const [gameName, setGameName] = useState<string>("hi")
 
     //Define a function used to set a player ona  specific space

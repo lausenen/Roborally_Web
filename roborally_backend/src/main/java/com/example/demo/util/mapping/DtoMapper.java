@@ -1,12 +1,14 @@
 package com.example.demo.util.mapping;
 
 import com.example.demo.controller.GameController.BoardDto;
+import com.example.demo.controller.GameController.GameDto;
 import com.example.demo.controller.GameController.PlayerDto;
 import com.example.demo.controller.GameController.SpaceDto;
 import com.example.demo.exceptions.MappingException;
 import com.example.demo.model.Board;
 import com.example.demo.model.Player;
 import com.example.demo.model.Space;
+import com.example.demo.model.admin.Game;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -28,7 +30,18 @@ public class DtoMapper implements IDtoMapper {
 
         return playerDto;
     }
+public GameDto convertToDto(Game game) throws MappingException{
+        if(game == null){
+            throw new MappingException("Game was null");
+        }
+        GameDto gameDto = new GameDto();
+        gameDto.setId(game.id);
+        gameDto.setName(game.name);
+        gameDto.setUsers(game.users);
+        gameDto.setStarted(game.started);
 
+        return gameDto;
+}
 
     public BoardDto convertToDto(Board board) throws MappingException {
         if(board == null){

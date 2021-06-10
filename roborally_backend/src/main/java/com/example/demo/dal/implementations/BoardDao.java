@@ -22,7 +22,7 @@ public class BoardDao implements IBoardDao {
 
     @Override
     public Board[] getBoards() {
-        return boards.values().toArray(new Board[10]);
+        return boards.values().toArray(new Board[1]);
     }
 
     @Override
