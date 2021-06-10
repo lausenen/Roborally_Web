@@ -13,13 +13,18 @@ const BoardComponent: FunctionComponent<BoardComponentProps> = () => {
     const {board, loaded} = useContext(GameContext) //Hook form of Context.Consumer, used to access the context
     const {unselectGame} = useContext(GameContext)
 
-    const onClickGame = async () => {
+    const onClickTitle = async () => {
         unselectGame()
     }
     return (
+
         /*Apply css on div below*/
-        <div className={styles.container}>
-            {/*
+<div>
+            {loaded ? (<div onClick={onClickTitle}>
+                <h1>{board.boardName}</h1>
+                <br/>
+            </div>) : <div/>/*
+
                 The {...} notation is JSX allowing us to blend HTML and JS/TS together
                 The first map call returns an array of "divs" which are rendered.
                 Keys helps react identify where a change has happend and thus which component to rerender upon changes
@@ -38,8 +43,8 @@ const BoardComponent: FunctionComponent<BoardComponentProps> = () => {
                     </div>
 
             */}
+    <div className={styles.container}>
             {loaded ? (
-
 
                 board.spaceDtos.map((spaceArray, index) =>
                     <div key={"spaceArray" + index}>
@@ -51,8 +56,8 @@ const BoardComponent: FunctionComponent<BoardComponentProps> = () => {
 
             ) : <div/>}
 
-
-        </div>
+            </div>
+</div>
     )
 }
 
