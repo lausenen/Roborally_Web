@@ -1,6 +1,7 @@
 import axios from "axios";
 import {Board} from "../types/Board";
 import {Space} from "../types/Space";
+import {Game} from "../types/Game";
 
 class GameApi{
     private static instance : GameApi;
@@ -13,7 +14,14 @@ class GameApi{
         }
         return GameApi.instance;
     }
+/*
+TODO Way to start game
 
+TODO Way to create new game
+ */
+    public getGames() {
+        return axios.get<Game[]>(`${this.BACKEND_URL}/game`).then(value =>value.data)
+    }
     public getBoard(boardId : number){
         return axios.get<Board>(`${this.BACKEND_URL}/board/${boardId}`).then(value =>value.data)
     }

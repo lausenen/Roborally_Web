@@ -7,11 +7,13 @@ import com.example.demo.model.Board;
 import com.example.demo.model.Player;
 import com.example.demo.model.admin.Game;
 import com.example.demo.model.admin.User;
+import com.example.demo.service.interfaces.IGameAdminService;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
-public class GameAdminService {
+@Service
+public class GameAdminService implements IGameAdminService {
     private final IBoardDao boardDao;
 
     public GameAdminService(IBoardDao boardDao) {
