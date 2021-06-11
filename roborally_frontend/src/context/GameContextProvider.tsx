@@ -5,6 +5,8 @@ import {Board} from "../types/Board";
 import {Space} from "../types/Space";
 import GameApi from "../api/GameApi";
 import {Game} from "../types/Game";
+import {Console} from "inspector";
+import {setInterval} from "timers";
 
 type GameContextProviderPropsType = {
     children: ReactNode
@@ -14,7 +16,9 @@ type GameContextProviderPropsType = {
 const GameContextProvider = ({children}: GameContextProviderPropsType) => {
     const [loaded, setLoaded] = useState<boolean>(false)
     const [gameId, setGameId] = useState<number>(0)
+
     useEffect(() => {
+        const interval = setInterval(async () =>{
         if(loaded && gameId >= 0){
         GameApi.getBoard(gameId).then(board => {
             if(gameId === board.boardId){
@@ -46,7 +50,9 @@ const GameContextProvider = ({children}: GameContextProviderPropsType) => {
                 setGames(games)
             }).catch(() => {console.error("Games could not be loaded")})
         }
-    }, [])
+    }, 5000)
+        return () => clearInterval(interval)
+    },[loaded, gameId])
     //The code below is executed when the provider is rendered (inside App.tsx)
     //The code should fetch the data from the API instead of using a static assignment
     //Define a useState variable, note that useState returns an array, containing that state itself aswell as

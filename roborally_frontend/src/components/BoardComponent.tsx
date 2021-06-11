@@ -44,6 +44,7 @@ const BoardComponent: FunctionComponent<BoardComponentProps> = () => {
                     </div>
 
             */}
+    <br/>
     <div className={styles.container}>
             {loaded ? (
 
