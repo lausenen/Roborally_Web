@@ -20,8 +20,9 @@ const BoardComponent: FunctionComponent<BoardComponentProps> = () => {
 
         /*Apply css on div below*/
 <div>
-            {loaded ? (<div onClick={onClickTitle}>
+            {loaded ? (<div>
                 <h1>{board.boardName}</h1>
+                <button onClick={onClickTitle} className="button button1">Quit</button>
                 <br/>
             </div>) : <div/>/*
 
