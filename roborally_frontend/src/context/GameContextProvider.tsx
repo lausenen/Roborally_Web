@@ -15,42 +15,14 @@ type GameContextProviderPropsType = {
 
 const GameContextProvider = ({children}: GameContextProviderPropsType) => {
     const [loaded, setLoaded] = useState<boolean>(false)
+    const [gamesLoaded, setGamesLoaded] = useState<boolean>(false)
     const [gameId, setGameId] = useState<number>(0)
 
     useEffect(() => {
-        const interval = setInterval(async () =>{
-        if(loaded && gameId >= 0){
-        GameApi.getBoard(gameId).then(board => {
-            if(gameId === board.boardId){
 
-            setSpaces(board.spaceDtos)
-            setPlayers(board.playerDtos)
-            setWidth(board.width)
-            setHeight(board.height)
-            setGameId(board.boardId)
-            setGameName(board.boardName)
-            if (board.currentPlayerDto) {
-                setCurrentPlayer(board.currentPlayerDto)
-                board.playerDtos.forEach((player,index)=>{
-                    if(player.playerId === board.currentPlayerDto?.playerId){
-                        setCurrentPlayerIndex(index)
-                    }
-                })
-            } else  {
-                console.error("Game doens't match board")
-            }
 
-            }
-        }).catch(() => {
-            console.error("Error while fetching board from backend")
-        })
-        }
-        else {
-            GameApi.getGames().then(games => {
-                setGames(games)
-            }).catch(() => {console.error("Games could not be loaded")})
-        }
-    }, 5000)
+        const interval = setInterval(load, 5000)
+        load()
         return () => clearInterval(interval)
     },[loaded, gameId])
     //The code below is executed when the provider is rendered (inside App.tsx)
@@ -67,6 +39,42 @@ const GameContextProvider = ({children}: GameContextProviderPropsType) => {
     const [width, setWidth] = useState<number>(0)
     const [height, setHeight] = useState<number>(0)
     const [gameName, setGameName] = useState<string>("hi")
+
+    const load = async () => {
+        if (loaded && gameId >= 0) {
+            GameApi.getBoard(gameId).then(board => {
+                if (gameId === board.boardId) {
+
+                    setSpaces(board.spaceDtos)
+                    setPlayers(board.playerDtos)
+                    setWidth(board.width)
+                    setHeight(board.height)
+                    setGameId(board.boardId)
+                    setGameName(board.boardName)
+                    if (board.currentPlayerDto) {
+                        setCurrentPlayer(board.currentPlayerDto)
+                        board.playerDtos.forEach((player, index) => {
+                            if (player.playerId === board.currentPlayerDto?.playerId) {
+                                setCurrentPlayerIndex(index)
+                            }
+                        })
+                    } else {
+                        console.error("Game doens't match board")
+                    }
+
+                }
+            }).catch(() => {
+                console.error("Error while fetching board from backend")
+            })
+        } else {
+            GameApi.getGames().then(games => {
+                setGames(games)
+                setGamesLoaded(true)
+            }).catch(() => {
+                console.error("Games could not be loaded")
+            })
+        }
+    }
 
     //Define a function used to set a player ona  specific space
     const setPlayerOnSpace = useCallback(async (space: Space) => {
@@ -152,6 +160,8 @@ const GameContextProvider = ({children}: GameContextProviderPropsType) => {
                     games: games,
                     selectGame: selectGame,
                     unselectGame: unselectGame,
+                    load: load,
+                    gamesLoaded,
                     loaded: loaded,
                     board: board,
                     setCurrentPlayerOnSpace: setPlayerOnSpace,

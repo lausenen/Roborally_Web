@@ -7,10 +7,14 @@ import styles from "../styling/BoardComponent.module.scss";
 type GamesComponentProps = {}
 const GamesComponent: FunctionComponent<GamesComponentProps> = () => {
 
-    const {games, loaded} = useContext(GameContext)
+    const {games, gamesLoaded, loaded} = useContext(GameContext)
+    const {selectGame} = useContext(GameContext)
+
 
     return (
-        !loaded ?
+        <div>{
+
+        !loaded ?(
             <div className={styles.container}>
                 <div>{ games.map((game,index) =>
         <GameComponent key={"game" + index} game={game}/>
@@ -19,8 +23,15 @@ const GamesComponent: FunctionComponent<GamesComponentProps> = () => {
             }
         </div>
             </div>
+            )
             :
-            <div/>
+            <div></div>
+}
+<br/>
+            { gamesLoaded ?
+                (
+                <button className="button button2">Create Game</button>) : <div/>}
+        </div>
 
     )
 }

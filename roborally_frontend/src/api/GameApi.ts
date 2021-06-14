@@ -15,8 +15,8 @@ class GameApi{
         return GameApi.instance;
     }
 /*
-TODO Way to start game
 
+TODO Way to start game
 TODO Way to create new game
  */
     public getGames() {
