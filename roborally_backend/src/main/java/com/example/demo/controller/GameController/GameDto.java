@@ -7,8 +7,10 @@ import java.util.List;
 
 public class GameDto {
     public String name;
-    public int id;
+    public Integer gameId;
     public boolean started;
+    public Integer width;
+    public Integer height;
     public List<User> users = new ArrayList<>();
 
     public String getName() {
@@ -19,12 +21,12 @@ public class GameDto {
         this.name = name;
     }
 
-    public int getId() {
-        return id;
+    public int getGameId() {
+        return gameId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setGameId(int gameId) {
+        this.gameId = gameId;
     }
 
     public boolean isStarted() {

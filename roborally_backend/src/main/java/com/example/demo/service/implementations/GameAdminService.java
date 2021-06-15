@@ -1,6 +1,7 @@
 package com.example.demo.service.implementations;
 
 import com.example.demo.dal.interfaces.IBoardDao;
+import com.example.demo.dal.interfaces.IGameDao;
 import com.example.demo.exceptions.DaoException;
 import com.example.demo.exceptions.ServiceException;
 import com.example.demo.model.Board;
@@ -11,21 +12,24 @@ import com.example.demo.service.interfaces.IGameAdminService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 @Service
 public class GameAdminService implements IGameAdminService {
     private final IBoardDao boardDao;
+    private final IGameDao gameDao;
 
-    public GameAdminService(IBoardDao boardDao) {
+    public GameAdminService(IBoardDao boardDao, IGameDao gameDao) {
         this.boardDao = boardDao;
+        this.gameDao = gameDao;
     }
 
-    public List<Game> getGames() throws ServiceException, DaoException {
+    public Collection<Game> getGames() throws ServiceException, DaoException {
 
-    List<Game> result = new ArrayList<>();
+   /* List<Game> result = new ArrayList<>();
     for(Board board: boardDao.getBoards()){
         Game game = new Game();
-        game.id = board.getGameId();
+        game.gameId = board.getGameId();
         game.name = board.boardName;
         result.add(game);
 
@@ -39,6 +43,12 @@ public class GameAdminService implements IGameAdminService {
         }
 
     }
-    return result;
+    return result;*/
+        return gameDao.getGames();
 }
+
+    @Override
+    public int saveGame(Game game) throws ServiceException, DaoException {
+        return gameDao.creatGame(game);
+    }
 }

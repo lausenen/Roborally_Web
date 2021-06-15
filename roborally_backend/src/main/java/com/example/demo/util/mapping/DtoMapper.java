@@ -4,6 +4,7 @@ import com.example.demo.controller.GameController.BoardDto;
 import com.example.demo.controller.GameController.GameDto;
 import com.example.demo.controller.GameController.PlayerDto;
 import com.example.demo.controller.GameController.SpaceDto;
+import com.example.demo.dal.interfaces.IGameDao;
 import com.example.demo.exceptions.MappingException;
 import com.example.demo.model.Board;
 import com.example.demo.model.Player;
@@ -13,6 +14,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class DtoMapper implements IDtoMapper {
+    private IGameDao gameDao;
+
+    public DtoMapper(IGameDao gameDAO) {
+        this.gameDao = gameDAO;
+    }
+
     public PlayerDto convertToDto(Player player) throws MappingException {
         if(player == null){
             throw new MappingException("Player was null");
@@ -35,7 +42,7 @@ public GameDto convertToDto(Game game) throws MappingException{
             throw new MappingException("Game was null");
         }
         GameDto gameDto = new GameDto();
-        gameDto.setId(game.id);
+        gameDto.setGameId(game.gameId);
         gameDto.setName(game.name);
         gameDto.setUsers(game.users);
         gameDto.setStarted(game.started);
@@ -112,5 +119,22 @@ public GameDto convertToDto(Game game) throws MappingException{
             return new Player(board, playerDto.getPlayerColor(), playerDto.getPlayerName());
         }
         return null;
+    }
+
+    public Game convertToEntity(GameDto gameDto){
+        if(gameDto.gameId == null){
+            Game game = new Game();
+            game.name = gameDto.name;
+            return game;
+
+        }
+        else{
+            Game game = gameDao.getGame(gameDto.gameId);
+            if(gameDto.name != null){
+                game.name = gameDto.name;
+            }
+            return game;
+        }
+
     }
 }

@@ -1,12 +1,14 @@
 package com.example.demo.util.mapping;
 
 import com.example.demo.controller.GameController.BoardDto;
+import com.example.demo.controller.GameController.GameDto;
 import com.example.demo.controller.GameController.PlayerDto;
 import com.example.demo.controller.GameController.SpaceDto;
 import com.example.demo.exceptions.MappingException;
 import com.example.demo.model.Board;
 import com.example.demo.model.Player;
 import com.example.demo.model.Space;
+import com.example.demo.model.admin.Game;
 
 public interface IDtoMapper {
     PlayerDto convertToDto(Player player) throws MappingException;
@@ -14,6 +16,8 @@ public interface IDtoMapper {
     BoardDto convertToDto(Board board) throws MappingException;
 
     SpaceDto convertToDto(Space space) throws MappingException;
+
+    Game convertToEntity(GameDto gameDto);
 
     Board convertToEntity(BoardDto boardDto);
 

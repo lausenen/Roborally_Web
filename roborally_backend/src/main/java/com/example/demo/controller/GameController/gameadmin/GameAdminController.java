@@ -1,16 +1,16 @@
 package com.example.demo.controller.GameController.gameadmin;
 
+import com.example.demo.controller.GameController.GameDto;
 import com.example.demo.exceptions.DaoException;
 import com.example.demo.exceptions.MappingException;
 import com.example.demo.exceptions.ServiceException;
 import com.example.demo.model.admin.Game;
 import com.example.demo.service.interfaces.IGameAdminService;
 import com.example.demo.util.mapping.DtoMapper;
+import com.example.demo.util.mapping.IDtoMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,9 +19,21 @@ import java.util.List;
 public class GameAdminController {
 
 private final IGameAdminService gameAdminService;
+private final IDtoMapper dtoMapper;
 
-    public GameAdminController(IGameAdminService gameAdminService) {
+    public GameAdminController(IGameAdminService gameAdminService, IDtoMapper dtoMapper) {
         this.gameAdminService = gameAdminService;
+        this.dtoMapper = dtoMapper;
+
+    }
+    @PostMapping("/game")
+public ResponseEntity<Integer> createGame(@RequestBody GameDto gameDto) throws ServiceException, MappingException, DaoException {
+        if(gameDto.gameId != null){
+            return new ResponseEntity<>(0, HttpStatus.BAD_REQUEST);
+        }
+        Game game = dtoMapper.convertToEntity(gameDto);
+        gameAdminService.saveGame(game);
+        return new ResponseEntity<>(game.gameId, HttpStatus.OK);
     }
 
     @GetMapping("/game")
