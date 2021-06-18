@@ -19,12 +19,11 @@ const GameContextProvider = ({children}: GameContextProviderPropsType) => {
     const [gameId, setGameId] = useState<number>(0)
 
     useEffect(() => {
-
-
         const interval = setInterval(load, 5000)
         load()
         return () => clearInterval(interval)
     },[loaded, gameId])
+
     //The code below is executed when the provider is rendered (inside App.tsx)
     //The code should fetch the data from the API instead of using a static assignment
     //Define a useState variable, note that useState returns an array, containing that state itself aswell as
@@ -114,7 +113,7 @@ const GameContextProvider = ({children}: GameContextProviderPropsType) => {
     }, [currentPlayerIndex, gameId, playerCount, players])
 
     const selectGame = useCallback(async (game:Game) => {
-        GameApi.getBoard(game.id).then(board=> {
+        GameApi.getBoard(game.gameId).then(board=> {
             setSpaces(board.spaceDtos)
             setPlayers(board.playerDtos)
             setWidth(board.width)

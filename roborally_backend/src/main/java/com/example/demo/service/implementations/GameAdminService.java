@@ -26,7 +26,7 @@ public class GameAdminService implements IGameAdminService {
 
     public Collection<Game> getGames() throws ServiceException, DaoException {
 
-   /* List<Game> result = new ArrayList<>();
+   /*List<Game> result = new ArrayList<>();
     for(Board board: boardDao.getBoards()){
         Game game = new Game();
         game.gameId = board.getGameId();

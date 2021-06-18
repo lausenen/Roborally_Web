@@ -2,7 +2,7 @@ import {User} from "./User";
 
 export type Game = {
     name: string,
-    id: number,
+    gameId: number,
     started: boolean,
     users: User[]
 }

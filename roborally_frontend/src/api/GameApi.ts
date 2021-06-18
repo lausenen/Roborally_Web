@@ -22,6 +22,17 @@ TODO Way to create new game
     public getGames() {
         return axios.get<Game[]>(`${this.BACKEND_URL}/game`).then(value =>value.data)
     }
+
+    public createGame() {
+
+        const game = {//game objekt
+            name: "Test Game",
+            started: true,
+            users: []
+        }
+        return axios.post<number>(`${this.BACKEND_URL}/game`, game).then(value =>value.data)
+    }
+
     public getBoard(boardId : number){
         return axios.get<Board>(`${this.BACKEND_URL}/board/${boardId}`).then(value =>value.data)
     }

@@ -14,7 +14,7 @@ const BoardComponent: FunctionComponent<BoardComponentProps> = () => {
     const {unselectGame} = useContext(GameContext)
 
     const onClickTitle = async () => {
-        unselectGame()
+         await unselectGame()
     }
     return (
 
