@@ -6,7 +6,6 @@ public class BoardDto {
     private String boardName;
     private Integer height;
     private Integer width;
-    private Integer numberOfPlayers;
     private SpaceDto[][] spaceDtos;
     private PlayerDto currentPlayerDto;
     private PlayerDto[] playerDtos;
@@ -69,13 +68,5 @@ public class BoardDto {
 
     public Integer getWidth() {
         return width;
-    }
-
-    public Integer getNumberOfPlayers() {
-        return numberOfPlayers;
-    }
-
-    public void setNumberOfPlayers(Integer numberOfPlayers) {
-        this.numberOfPlayers = numberOfPlayers;
     }
 }

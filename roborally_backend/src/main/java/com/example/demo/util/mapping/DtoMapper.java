@@ -1,15 +1,13 @@
 package com.example.demo.util.mapping;
 
-import com.example.demo.controller.GameController.BoardDto;
-import com.example.demo.controller.GameController.GameDto;
-import com.example.demo.controller.GameController.PlayerDto;
-import com.example.demo.controller.GameController.SpaceDto;
+import com.example.demo.controller.GameController.*;
 import com.example.demo.dal.interfaces.IGameDao;
 import com.example.demo.exceptions.MappingException;
 import com.example.demo.model.Board;
 import com.example.demo.model.Player;
 import com.example.demo.model.Space;
 import com.example.demo.model.admin.Game;
+import com.example.demo.model.admin.User;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -49,6 +47,16 @@ public GameDto convertToDto(Game game) throws MappingException{
 
         return gameDto;
 }
+
+    public UserDto convertToDto(User user) throws MappingException{
+        if(user == null){
+            throw new MappingException("user was null");
+        }
+        UserDto userDto = new UserDto();
+        userDto.setUserId(user.userId);
+        userDto.setName(user.name);
+        return userDto;
+    }
 
     public BoardDto convertToDto(Board board) throws MappingException {
         if(board == null){
@@ -97,7 +105,7 @@ public GameDto convertToDto(Game game) throws MappingException{
     }
 
     public Board convertToEntity(BoardDto boardDto) {
-        Board board = new Board(boardDto.getWidth(), boardDto.getHeight(), boardDto.getBoardName(), boardDto.getNumberOfPlayers());
+        Board board = new Board(boardDto.getWidth(), boardDto.getHeight(), boardDto.getBoardName());
         if (boardDto.getBoardId() != -1) {
             board.setGameId(boardDto.getBoardId());
         }
@@ -136,5 +144,15 @@ public GameDto convertToDto(Game game) throws MappingException{
             return game;
         }
 
+    }
+
+    @Override
+    public User convertToEntity(UserDto userDto) {
+        User user = new User();
+        user.name = userDto.name;
+        user.displayName = userDto.displayName;
+        user.userId = userDto.UserId;
+
+        return user;
     }
 }

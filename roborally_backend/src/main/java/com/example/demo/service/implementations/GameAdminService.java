@@ -1,7 +1,9 @@
 package com.example.demo.service.implementations;
 
+import com.example.demo.dal.implementations.UserDao;
 import com.example.demo.dal.interfaces.IBoardDao;
 import com.example.demo.dal.interfaces.IGameDao;
+import com.example.demo.dal.interfaces.IUserDao;
 import com.example.demo.exceptions.DaoException;
 import com.example.demo.exceptions.ServiceException;
 import com.example.demo.model.Board;
@@ -18,10 +20,12 @@ import java.util.List;
 public class GameAdminService implements IGameAdminService {
     private final IBoardDao boardDao;
     private final IGameDao gameDao;
+    private final IUserDao userDao;
 
-    public GameAdminService(IBoardDao boardDao, IGameDao gameDao) {
+    public GameAdminService(IBoardDao boardDao, IGameDao gameDao, IUserDao userDao) {
         this.boardDao = boardDao;
         this.gameDao = gameDao;
+        this.userDao = userDao;
     }
 
     public Collection<Game> getGames() throws ServiceException, DaoException {
@@ -50,5 +54,21 @@ public class GameAdminService implements IGameAdminService {
     @Override
     public int saveGame(Game game) throws ServiceException, DaoException {
         return gameDao.creatGame(game);
+    }
+
+    @Override
+    public User validateUser(String name) throws ServiceException, DaoException {
+        for (User user:
+             userDao.getUsers()) {
+            if(user.name.equals(name)){
+                return user;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void saveUser(User user) throws ServiceException, DaoException {
+        userDao.createUser(user);
     }
 }

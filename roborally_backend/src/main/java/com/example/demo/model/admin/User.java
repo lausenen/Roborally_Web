@@ -2,7 +2,7 @@ package com.example.demo.model.admin;
 
 public class User {
 
-    public Integer playerId;
-
-    public String playerName;
+    public Integer userId;
+    public String name;
+    public String displayName;
 }

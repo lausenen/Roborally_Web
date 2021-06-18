@@ -32,7 +32,6 @@ const GameContextProvider = ({children}: GameContextProviderPropsType) => {
     const [players, setPlayers] = useState<Player[]>([])
     const [games, setGames] = useState<Game[]>([])
     const playerCount = useMemo(() => players.length, [players])
-    const [numberOfPlayers, setNumberOfPlayers] = useState<number>(2);
     const [currentPlayerIndex, setCurrentPlayerIndex] = useState<number>(0)
     const [currentPlayer, setCurrentPlayer] = useState<Player>({playerId : -1,playerColor:"red",boardId : -1,playerName : ""})
     const [spaces, setSpaces] = useState<Space[][]>([])
@@ -145,7 +144,6 @@ const GameContextProvider = ({children}: GameContextProviderPropsType) => {
             playerDtos: players,
             currentPlayerDto: currentPlayer,
             currentPlayerIndex: currentPlayerIndex,
-            numberOfPlayers: numberOfPlayers,
             width: width,
             height: height,
             boardName: gameName,

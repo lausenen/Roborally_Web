@@ -44,7 +44,6 @@ public class Board {
     private Integer gameId;
     private final Space[][] spaces;
 
-    private Integer numberOfPlayers;
     private final List<Player> players = new ArrayList<Player>();
     private Player current;
 
@@ -56,11 +55,10 @@ public class Board {
 
     private int counter = 0;
 
-    public Board(int width, int height, @NotNull String boardName, Integer numberOfPlayers) {
+    public Board(int width, int height, @NotNull String boardName) {
         this.boardName = boardName;
         this.width = width;
         this.height = height;
-        this.numberOfPlayers = numberOfPlayers;
         spaces = new Space[width][height];
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
@@ -72,7 +70,7 @@ public class Board {
     }
 
     public Board(int width, int height) {
-        this(width, height, "defaultboard",2);
+        this(width, height, "defaultboard");
     }
 
     public Integer getGameId() {
@@ -228,12 +226,5 @@ public class Board {
 
     public Space[][] getSpaces() {
         return spaces;
-    }
-    public Integer getNumberOfPlayers() {
-        return numberOfPlayers;
-    }
-
-    public void setNumberOfPlayers(Integer numberOfPlayers) {
-        this.numberOfPlayers = numberOfPlayers;
     }
 }
