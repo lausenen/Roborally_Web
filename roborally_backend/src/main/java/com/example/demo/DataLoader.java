@@ -23,7 +23,7 @@ public class DataLoader implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws ServiceException, DaoException {
-        Board board = new Board(8, 8, "Board1");
+       /* Board board = new Board(8, 8, "Board1");
         gameService.saveBoard(board);
         Player player = new Player(board, "blue", "Player1Name");
         gameService.addPlayer(board.getGameId(), player);
@@ -42,7 +42,7 @@ public class DataLoader implements ApplicationRunner {
         player = new Player(board2, "green", "Player2Name");
         gameService.addPlayer(board2.getGameId(), player);
         gameService.movePlayer(board2, 4, 4, player.getPlayerId());
-        /*gameService.switchCurrentPlayer(board);*/
+        *//*gameService.switchCurrentPlayer(board);*//*
 
-    }
+         */ }
 }
