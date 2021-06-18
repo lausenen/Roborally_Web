@@ -7,7 +7,7 @@ public class Game {
 
     public String name;
 
-    public int gameId;
+    public Integer gameId;
 
     public boolean started;
 

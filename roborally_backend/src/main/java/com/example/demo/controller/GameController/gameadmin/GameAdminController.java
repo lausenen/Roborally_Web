@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -37,8 +38,8 @@ public ResponseEntity<Integer> createGame(@RequestBody GameDto gameDto) throws S
     }
 
     @GetMapping("/game")
-    public ResponseEntity<List<Game>> getGames() throws ServiceException, MappingException, DaoException{
-        List<Game> games = gameAdminService.getGames();
+    public ResponseEntity<Collection<Game>> getGames() throws ServiceException, MappingException, DaoException{
+        Collection<Game> games = gameAdminService.getGames();
         return new ResponseEntity<>(games, HttpStatus.OK);
     }
 
