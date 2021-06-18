@@ -97,7 +97,7 @@ public GameDto convertToDto(Game game) throws MappingException{
     }
 
     public Board convertToEntity(BoardDto boardDto) {
-        Board board = new Board(boardDto.getWidth(), boardDto.getHeight(), boardDto.getBoardName());
+        Board board = new Board(boardDto.getWidth(), boardDto.getHeight(), boardDto.getBoardName(), boardDto.getNumberOfPlayers());
         if (boardDto.getBoardId() != -1) {
             board.setGameId(boardDto.getBoardId());
         }

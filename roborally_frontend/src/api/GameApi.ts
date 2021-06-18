@@ -32,22 +32,18 @@ TODO Way to create new game
             users: []
         }
 
-        const board = {//game object
-            boardId : 0,
-            boardName : "TestBoard",
-            height : 8,
-            width : 8,
-            spaceDtos : Space[][],
-            playerDtos : Player[],
-            //The "?" operator is a shorthand for currentPlayer : Player | undefined, which means that
-            // the currentPlayer property can either be of type Player or undefined
-            // see https://www.typescriptlang.org/docs/handbook/interfaces.html#optional-properties
-            currentPlayerDto? : Player
-        }
+        this.createBoard();
         return axios.post<number>(`${this.BACKEND_URL}/game`, game).then(value =>value.data)
     }
     public createBoard(){
-        return axios.post<number>(`${this.BACKEND_URL}/board/`,).then(value =>value.data)
+        const board = {//game object
+            boardId : -1,
+            boardName : "TestBoard",
+            height : 8,
+            width : 8,
+            numberOfPlayers: 2
+        }
+        return axios.post<number>(`${this.BACKEND_URL}/board/`,board).then(value =>value.data)
     }
     public getBoard(boardId : number){
         return axios.get<Board>(`${this.BACKEND_URL}/board/${boardId}`).then(value =>value.data)

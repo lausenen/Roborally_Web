@@ -4,8 +4,9 @@ public class BoardDto {
 
     private Integer boardId;
     private String boardName;
-    private int height;
-    private int width;
+    private Integer height;
+    private Integer width;
+    private Integer numberOfPlayers;
     private SpaceDto[][] spaceDtos;
     private PlayerDto currentPlayerDto;
     private PlayerDto[] playerDtos;
@@ -54,20 +55,27 @@ public class BoardDto {
         this.boardName = boardName;
     }
 
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
+    public void setHeight(Integer height) {
         this.height = height;
     }
 
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
+    public void setWidth(Integer width) {
         this.width = width;
     }
 
+    public Integer getHeight() {
+        return height;
+    }
+
+    public Integer getWidth() {
+        return width;
+    }
+
+    public Integer getNumberOfPlayers() {
+        return numberOfPlayers;
+    }
+
+    public void setNumberOfPlayers(Integer numberOfPlayers) {
+        this.numberOfPlayers = numberOfPlayers;
+    }
 }

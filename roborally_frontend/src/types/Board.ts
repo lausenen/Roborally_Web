@@ -6,6 +6,7 @@ export type Board = {
     boardName : string,
     height : number,
     width : number,
+    numberOfPlayers: number,
     spaceDtos : Space[][],
     playerDtos : Player[],
     //The "?" operator is a shorthand for currentPlayer : Player | undefined, which means that

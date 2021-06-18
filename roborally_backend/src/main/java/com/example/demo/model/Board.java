@@ -35,15 +35,16 @@ import static com.example.demo.model.Phase.INITIALISATION;
  * @author Ekkart Kindler, ekki@dtu.dk
  */
 public class Board {
-    public final int width;
+    public final Integer width;
 
-    public final int height;
+    public final Integer height;
 
     public final String boardName;
 
     private Integer gameId;
     private final Space[][] spaces;
 
+    private Integer numberOfPlayers;
     private final List<Player> players = new ArrayList<Player>();
     private Player current;
 
@@ -55,10 +56,11 @@ public class Board {
 
     private int counter = 0;
 
-    public Board(int width, int height, @NotNull String boardName) {
+    public Board(int width, int height, @NotNull String boardName, Integer numberOfPlayers) {
         this.boardName = boardName;
         this.width = width;
         this.height = height;
+        this.numberOfPlayers = numberOfPlayers;
         spaces = new Space[width][height];
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
@@ -70,7 +72,7 @@ public class Board {
     }
 
     public Board(int width, int height) {
-        this(width, height, "defaultboard");
+        this(width, height, "defaultboard",2);
     }
 
     public Integer getGameId() {
@@ -226,5 +228,12 @@ public class Board {
 
     public Space[][] getSpaces() {
         return spaces;
+    }
+    public Integer getNumberOfPlayers() {
+        return numberOfPlayers;
+    }
+
+    public void setNumberOfPlayers(Integer numberOfPlayers) {
+        this.numberOfPlayers = numberOfPlayers;
     }
 }
