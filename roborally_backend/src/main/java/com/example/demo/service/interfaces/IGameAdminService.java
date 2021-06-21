@@ -10,6 +10,8 @@ import java.util.List;
 
 public interface IGameAdminService {
     Collection<Game> getGames() throws ServiceException, DaoException;
+    Game getGame(int gameId) throws ServiceException, DaoException;
+    Game joinAsUser(User user, int gameId) throws ServiceException, DaoException;
  int saveGame(Game game) throws ServiceException, DaoException;
     User validateUser(String name) throws ServiceException, DaoException;
     void saveUser(User user) throws ServiceException, DaoException;

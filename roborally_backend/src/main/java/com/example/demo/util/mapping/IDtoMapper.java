@@ -26,4 +26,6 @@ public interface IDtoMapper {
     Space convertToEntity(SpaceDto spaceDto, Board board);
 
     Player convertToEntity(PlayerDto playerDto, Board board) throws MappingException;
+
+    GameDto convertToDto(Game game) throws MappingException;
 }

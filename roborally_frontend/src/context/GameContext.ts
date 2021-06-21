@@ -9,6 +9,7 @@ export type GameContextType = {
     selectGame: (game: Game) => Promise<void>,
     unselectGame: () => Promise<void>,
     validateUser: (name:string) => any,
+    joinAsUser: (game:Game) => any,
     currentUser: User,
     load: () => any,
     gamesLoaded : boolean
@@ -27,6 +28,7 @@ const GameContext = createContext<GameContextType>({
     unselectGame: async () => {},
     load: async () => {},
     validateUser: async ()=> {},
+    joinAsUser: async () => {},
 
     gamesLoaded : false,
     loaded : false,

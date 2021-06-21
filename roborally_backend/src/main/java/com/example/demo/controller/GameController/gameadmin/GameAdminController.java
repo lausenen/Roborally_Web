@@ -1,10 +1,14 @@
 package com.example.demo.controller.GameController.gameadmin;
 
+import com.example.demo.controller.GameController.BoardDto;
 import com.example.demo.controller.GameController.GameDto;
+import com.example.demo.controller.GameController.SpaceDto;
 import com.example.demo.controller.GameController.UserDto;
 import com.example.demo.exceptions.DaoException;
 import com.example.demo.exceptions.MappingException;
 import com.example.demo.exceptions.ServiceException;
+import com.example.demo.model.Board;
+import com.example.demo.model.Space;
 import com.example.demo.model.admin.Game;
 import com.example.demo.model.admin.User;
 import com.example.demo.service.interfaces.IGameAdminService;
@@ -38,6 +42,18 @@ public ResponseEntity<Integer> createGame(@RequestBody GameDto gameDto) throws S
         gameAdminService.saveGame(game);
         return new ResponseEntity<>(game.gameId, HttpStatus.OK);
     }
+    @GetMapping("/game/{gameId}")
+    public ResponseEntity<GameDto> getGame(@PathVariable("gameId") int gameId) throws ServiceException, MappingException, DaoException {
+        Game game = gameAdminService.getGame(gameId);
+        return new ResponseEntity<>(dtoMapper.convertToDto(game), HttpStatus.OK);
+    }
+
+ @PutMapping("/game/{gameId}")
+    public ResponseEntity<GameDto> joinAsUser(@PathVariable("gameId") int gameId,@RequestBody UserDto userDto) throws ServiceException, DaoException, MappingException {
+        User user = dtoMapper.convertToEntity(userDto);
+        gameAdminService.joinAsUser(user, gameId);
+        return new ResponseEntity<>(dtoMapper.convertToDto(gameAdminService.getGame(gameId)),HttpStatus.OK);
+    }
 
     @PostMapping("/user")
     public ResponseEntity<Integer> createUser(@RequestBody UserDto userDto) throws ServiceException, MappingException, DaoException {
@@ -49,16 +65,12 @@ public ResponseEntity<Integer> createGame(@RequestBody GameDto gameDto) throws S
         return new ResponseEntity<>(user.userId, HttpStatus.OK);
     }
 
-    @GetMapping("/game")
-    public ResponseEntity<Collection<Game>> getGames() throws ServiceException, MappingException, DaoException{
-        Collection<Game> games = gameAdminService.getGames();
-        return new ResponseEntity<>(games, HttpStatus.OK);
-    }
-/*   @GetMapping("/user")
-    public ResponseEntity<Collection<User>> getUsers() throws ServiceException, MappingException, DaoException{
-        Collection<User> users = gameAdminService.getUsers();
-        return new ResponseEntity<>(users, HttpStatus.OK);
-    }*/
+   @GetMapping("/game")
+    public ResponseEntity<Collection<Game>> getGames() throws ServiceException, MappingException, DaoException {
+       Collection<Game> games = gameAdminService.getGames();
+       return new ResponseEntity<>(games, HttpStatus.OK);
+   }
+
 
     @GetMapping("/user")
     public ResponseEntity<UserDto> validateUser(@RequestParam String name) throws ServiceException, MappingException, DaoException {

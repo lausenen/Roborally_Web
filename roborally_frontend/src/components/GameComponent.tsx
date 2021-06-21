@@ -9,23 +9,29 @@ export type GameComponentProps = {
 }
 
 export const GameComponent: FunctionComponent<GameComponentProps> = ({game}) => {
-    const {selectGame} = useContext(GameContext)
+    const {selectGame, currentUser, joinAsUser} = useContext(GameContext)
+
 
     const onClickGame = async () => {
         await selectGame(game)
+    }
+    const onJoinGame = async () => {
+        await joinAsUser(game)
     }
 
     return(
 
         <div className="h1">
              <h1>{game.gameId}: {game.name}</h1>
+            <p>Joined Players ({game.users.length}/{game.numberOfUsers})</p>
             <ul>
                 {game.users.map((user, index) => <li>
                     {user.name} (no function yet)
                 </li>)}
             </ul>
             <p>Max amount of players: {game.numberOfUsers}</p>
-                <button onClick={onClickGame} className="button button1">Play</button>
+                <button onClick={onJoinGame} className="button button1">Join Game</button>
+                <button onClick={onClickGame} className="button button1">Start Game</button>
 
     </div>
     )

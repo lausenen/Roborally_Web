@@ -163,6 +163,19 @@ const GameContextProvider = ({children}: GameContextProviderPropsType) => {
         setCurrentUser(response)
 
     }
+    const joinAsUser = async (game:Game) =>{
+        debugger;
+        let sameName = false
+        game.users.forEach(function (user) {
+            if(user.name === currentUser.name){
+                sameName = true
+            }
+        })
+        if(game.users.length != game.numberOfUsers && sameName === false){
+        await GameApi.joinAsUser(game.gameId,currentUser)
+        setGames(games)
+        }
+    }
 
 
 
@@ -175,6 +188,7 @@ const GameContextProvider = ({children}: GameContextProviderPropsType) => {
                     unselectGame: unselectGame,
                     load: load,
                     validateUser: ValidateUser,
+                    joinAsUser: joinAsUser,
                     currentUser: currentUser,
                     gamesLoaded,
                     loaded: loaded,

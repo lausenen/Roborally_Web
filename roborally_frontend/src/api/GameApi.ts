@@ -25,6 +25,12 @@ class GameApi{
         )
     }
 
+    public joinAsUser(gameId:number, user:User){
+        return axios.put<Game>(`${this.BACKEND_URL}/game/${gameId}`,user).then(
+            value => value.data
+        )
+    }
+
     public validateUser(name: string){
         return axios.get<User>(`${this.BACKEND_URL}/user`, {params:{name: name}}).then(
             value => value.data
@@ -47,7 +53,7 @@ class GameApi{
         }
 
         this.createBoard(width, height);
-        return axios.post<number>(`${this.BACKEND_URL}/game`, game).then(value =>value.data)
+        return axios.post<number>(`${this.BACKEND_URL}/game/`, game).then(value =>value.data)
     }
 
     public createBoard(width:number, height:number){

@@ -39,4 +39,9 @@ static private int gameIdCounter = 0;
     public Collection<Game> getGames() {
         return games.values();
     }
+
+    @Override
+    public void updateGame(Game game) {
+        games.replace(game.gameId, game);
+    }
 }

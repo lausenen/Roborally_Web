@@ -10,4 +10,5 @@ public interface IGameDao {
     int creatGame(Game game);
     Game getGame(int id);
     Collection<Game> getGames();
+    void updateGame(Game game);
 }
