@@ -19,12 +19,14 @@ export const GameComponent: FunctionComponent<GameComponentProps> = ({game}) => 
 
         <div className="h1">
              <h1>{game.gameId}: {game.name}</h1>
-                <button onClick={onClickGame} className="button button1">Play</button>
             <ul>
                 {game.users.map((user, index) => <li>
-                    {user.playerName} (no function yet)
+                    {user.name} (no function yet)
                 </li>)}
             </ul>
+            <p>Max amount of players: {game.numberOfUsers}</p>
+                <button onClick={onClickGame} className="button button1">Play</button>
+
     </div>
     )
 }

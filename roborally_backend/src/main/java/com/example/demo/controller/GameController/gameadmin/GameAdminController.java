@@ -38,9 +38,10 @@ public ResponseEntity<Integer> createGame(@RequestBody GameDto gameDto) throws S
         gameAdminService.saveGame(game);
         return new ResponseEntity<>(game.gameId, HttpStatus.OK);
     }
-    @PostMapping("/user/")
+
+    @PostMapping("/user")
     public ResponseEntity<Integer> createUser(@RequestBody UserDto userDto) throws ServiceException, MappingException, DaoException {
-        if(userDto.getUserId() != null){
+        if(userDto.getName().trim().isEmpty()){
             return new ResponseEntity<>(0, HttpStatus.BAD_REQUEST);
         }
         User user = dtoMapper.convertToEntity(userDto);
@@ -53,8 +54,13 @@ public ResponseEntity<Integer> createGame(@RequestBody GameDto gameDto) throws S
         Collection<Game> games = gameAdminService.getGames();
         return new ResponseEntity<>(games, HttpStatus.OK);
     }
+/*   @GetMapping("/user")
+    public ResponseEntity<Collection<User>> getUsers() throws ServiceException, MappingException, DaoException{
+        Collection<User> users = gameAdminService.getUsers();
+        return new ResponseEntity<>(users, HttpStatus.OK);
+    }*/
 
-    @GetMapping("/user/")
+    @GetMapping("/user")
     public ResponseEntity<UserDto> validateUser(@RequestParam String name) throws ServiceException, MappingException, DaoException {
         User user = gameAdminService.validateUser(name);
         if (user != null) {
@@ -62,7 +68,8 @@ public ResponseEntity<Integer> createGame(@RequestBody GameDto gameDto) throws S
             return new ResponseEntity<>(userDto, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
 
         //TODO make services for creating new games, adding players, and update game
-    }
+
 }

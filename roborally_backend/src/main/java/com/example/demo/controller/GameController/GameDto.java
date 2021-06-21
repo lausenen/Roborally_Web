@@ -9,12 +9,21 @@ public class GameDto {
     public String name;
     public Integer gameId;
     public boolean started;
+    public Integer numberOfUsers;
     public Integer width;
     public Integer height;
     public List<User> users = new ArrayList<>();
 
     public String getName() {
         return name;
+    }
+
+    public Integer getNumberOfUsers() {
+        return numberOfUsers;
+    }
+
+    public void setNumberOfUsers(Integer numberOfUsers) {
+        this.numberOfUsers = numberOfUsers;
     }
 
     public void setName(String name) {

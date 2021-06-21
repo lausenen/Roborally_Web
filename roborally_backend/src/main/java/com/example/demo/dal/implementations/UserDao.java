@@ -30,6 +30,9 @@ public class UserDao implements IUserDao {
                 }
                 else{
                     user.userId = ++userIdCounter;
+                    if(user.displayName == null){
+                        user.displayName = user.name;
+                    }
                     users.put(user.userId, user);
                 }
             }

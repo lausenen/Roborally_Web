@@ -43,6 +43,7 @@ public GameDto convertToDto(Game game) throws MappingException{
         gameDto.setGameId(game.gameId);
         gameDto.setName(game.name);
         gameDto.setUsers(game.users);
+        gameDto.setNumberOfUsers(game.numberOfUsers);
         gameDto.setStarted(game.started);
 
         return gameDto;
@@ -55,6 +56,7 @@ public GameDto convertToDto(Game game) throws MappingException{
         UserDto userDto = new UserDto();
         userDto.setUserId(user.userId);
         userDto.setName(user.name);
+        userDto.setDisplayName(user.name);
         return userDto;
     }
 
@@ -133,6 +135,7 @@ public GameDto convertToDto(Game game) throws MappingException{
         if(gameDto.gameId == null){
             Game game = new Game();
             game.name = gameDto.name;
+            game.numberOfUsers = gameDto.numberOfUsers;
             return game;
 
         }
@@ -140,6 +143,7 @@ public GameDto convertToDto(Game game) throws MappingException{
             Game game = gameDao.getGame(gameDto.gameId);
             if(gameDto.name != null){
                 game.name = gameDto.name;
+                game.numberOfUsers = gameDto.numberOfUsers;
             }
             return game;
         }
@@ -151,7 +155,7 @@ public GameDto convertToDto(Game game) throws MappingException{
         User user = new User();
         user.name = userDto.name;
         user.displayName = userDto.displayName;
-        user.userId = userDto.UserId;
+        user.userId = userDto.userId;
 
         return user;
     }

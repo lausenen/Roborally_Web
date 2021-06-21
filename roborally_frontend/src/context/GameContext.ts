@@ -2,13 +2,15 @@ import {createContext} from "react";
 import {Board} from "../types/Board";
 import {Space} from "../types/Space";
 import {Game} from "../types/Game";
+import {User} from "../types/User";
 
 export type GameContextType = {
     games: Game[],
     selectGame: (game: Game) => Promise<void>,
     unselectGame: () => Promise<void>,
+    validateUser: (name:string) => any,
+    currentUser: User,
     load: () => any,
-
     gamesLoaded : boolean
     loaded : boolean,
     board: Board,
@@ -24,6 +26,7 @@ const GameContext = createContext<GameContextType>({
     selectGame: async () => {},
     unselectGame: async () => {},
     load: async () => {},
+    validateUser: async ()=> {},
 
     gamesLoaded : false,
     loaded : false,
@@ -36,6 +39,8 @@ const GameContext = createContext<GameContextType>({
         height: 0,
         width: 0
     },
+    currentUser: {name: "", userId: -1, displayName:""},
+
     setCurrentPlayerOnSpace: async () => {
     },
     switchCurrentPlayer: async () => {

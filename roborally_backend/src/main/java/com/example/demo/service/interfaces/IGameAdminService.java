@@ -13,4 +13,5 @@ public interface IGameAdminService {
  int saveGame(Game game) throws ServiceException, DaoException;
     User validateUser(String name) throws ServiceException, DaoException;
     void saveUser(User user) throws ServiceException, DaoException;
+    Collection<User> getUsers() throws ServiceException, DaoException;
 }

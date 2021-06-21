@@ -7,11 +7,11 @@ import GameApi from "../api/GameApi";
 import {Game} from "../types/Game";
 import {Console} from "inspector";
 import {setInterval} from "timers";
+import {User} from "../types/User";
 
 type GameContextProviderPropsType = {
     children: ReactNode
 }
-
 
 const GameContextProvider = ({children}: GameContextProviderPropsType) => {
     const [loaded, setLoaded] = useState<boolean>(false)
@@ -34,10 +34,16 @@ const GameContextProvider = ({children}: GameContextProviderPropsType) => {
     const playerCount = useMemo(() => players.length, [players])
     const [currentPlayerIndex, setCurrentPlayerIndex] = useState<number>(0)
     const [currentPlayer, setCurrentPlayer] = useState<Player>({playerId : -1,playerColor:"red",boardId : -1,playerName : ""})
+    const [currentUser, setCurrentUser] = useState<User>({userId : -1,name:"Test",displayName: ""})
+/*    const [currentUserId, setCurrentUserId] = useState<number>(-1)
+    const [currentUserName, setCurrentUserName] = useState<string>("Test")
+    const [currentUserDisplayName, setCurrentUserDisplayName] = useState<string>("Test")*/
     const [spaces, setSpaces] = useState<Space[][]>([])
     const [width, setWidth] = useState<number>(0)
     const [height, setHeight] = useState<number>(0)
     const [gameName, setGameName] = useState<string>("hi")
+
+
 
     const load = async () => {
         if (loaded && gameId >= 0) {
@@ -138,6 +144,7 @@ const GameContextProvider = ({children}: GameContextProviderPropsType) => {
         setLoaded(false)
     }, [])
 
+
     const board = useMemo<Board>(() => {
         return ({
             spaceDtos: spaces,
@@ -151,6 +158,13 @@ const GameContextProvider = ({children}: GameContextProviderPropsType) => {
         })
     }, [currentPlayer, currentPlayerIndex, gameId, gameName, height, players, spaces, width])
 
+    const ValidateUser = async (name:string) => {
+        const response = await GameApi.validateUser(name)
+        setCurrentUser(response)
+
+    }
+
+
 
     return (
         <GameContext.Provider
@@ -160,6 +174,8 @@ const GameContextProvider = ({children}: GameContextProviderPropsType) => {
                     selectGame: selectGame,
                     unselectGame: unselectGame,
                     load: load,
+                    validateUser: ValidateUser,
+                    currentUser: currentUser,
                     gamesLoaded,
                     loaded: loaded,
                     board: board,

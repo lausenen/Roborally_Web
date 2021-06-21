@@ -3,6 +3,7 @@ import {Board} from "../types/Board";
 import {Space} from "../types/Space";
 import {Game} from "../types/Game";
 import {Player} from "../types/Player";
+import {User} from "../types/User";
 
 class GameApi{
     private static instance : GameApi;
@@ -15,36 +16,50 @@ class GameApi{
         }
         return GameApi.instance;
     }
-/*
+    public createUser(name: string){
+        const User = {
+            name : name
+        }
+        return axios.post(`${this.BACKEND_URL}/user`, User).then(
+            value => value.data
+        )
+    }
 
-TODO Way to start game
-TODO Way to create new game
- */
+    public validateUser(name: string){
+        return axios.get<User>(`${this.BACKEND_URL}/user`, {params:{name: name}}).then(
+            value => value.data
+
+        )
+
+    }
+
     public getGames() {
         return axios.get<Game[]>(`${this.BACKEND_URL}/game`).then(value =>value.data)
     }
 
-    public createGame() {
+    public createGame(nameOfGame:string, width:number, height:number, playerCount:number) {
 
         const game = {//game object
-            name: "Test Game",
+            name: nameOfGame,
+            numberOfUsers: playerCount,
             started: true,
             users: []
         }
 
-        this.createBoard();
+        this.createBoard(width, height);
         return axios.post<number>(`${this.BACKEND_URL}/game`, game).then(value =>value.data)
     }
-    public createBoard(){
+
+    public createBoard(width:number, height:number){
         const board = {//game object
             boardId : -1,
             boardName : "TestBoard",
-            height : 8,
-            width : 8,
-            numberOfPlayers: 2
+            height : height,
+            width : width,
         }
         return axios.post<number>(`${this.BACKEND_URL}/board/`,board).then(value =>value.data)
     }
+
     public getBoard(boardId : number){
         return axios.get<Board>(`${this.BACKEND_URL}/board/${boardId}`).then(value =>value.data)
     }

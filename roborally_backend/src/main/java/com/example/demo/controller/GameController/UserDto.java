@@ -1,16 +1,16 @@
 package com.example.demo.controller.GameController;
 
 public class UserDto {
-    public Integer UserId;
+    public Integer userId;
     public String name;
     public String displayName;
 
     public Integer getUserId() {
-        return UserId;
+        return userId;
     }
 
     public void setUserId(Integer userId) {
-        UserId = userId;
+        this.userId = userId;
     }
 
     public String getName() {

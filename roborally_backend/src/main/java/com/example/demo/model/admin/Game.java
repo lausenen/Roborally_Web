@@ -11,5 +11,7 @@ public class Game {
 
     public boolean started;
 
+    public Integer numberOfUsers;
+
     public List<User> users = new ArrayList<>();
 }
