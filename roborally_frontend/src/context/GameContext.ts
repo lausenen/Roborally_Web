@@ -3,6 +3,7 @@ import {Board} from "../types/Board";
 import {Space} from "../types/Space";
 import {Game} from "../types/Game";
 import {User} from "../types/User";
+import {Player} from "../types/Player";
 
 export type GameContextType = {
     games: Game[],
@@ -12,6 +13,7 @@ export type GameContextType = {
     joinAsUser: (game:Game) => any,
     addPlayer: (playerName:string,playerColor:string,boardId:number,user:User) => any,
     currentUser: User,
+    currentPlayer: Player,
     load: () => any,
     gamesLoaded : boolean
     loaded : boolean,
@@ -42,7 +44,16 @@ const GameContext = createContext<GameContextType>({
         height: 0,
         width: 0
     },
-    currentUser: {name: "", userId: -1, displayName:""},
+    currentUser: {name: "", userId: -1, displayName:"", gameId:-1},
+    currentPlayer: {
+        boardId: -1,
+        playerId: -1,
+        playerName: "Player-1",
+        userId: -1,
+        //The | operator is known as the "union" type, allowing us to have a property that can take different values
+        // see https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#union-types
+        playerColor: "red",
+    },
 
     setCurrentPlayerOnSpace: async () => {
     },

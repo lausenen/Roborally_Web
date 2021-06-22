@@ -34,7 +34,7 @@ const GameContextProvider = ({children}: GameContextProviderPropsType) => {
     const playerCount = useMemo(() => players.length, [players])
     const [currentPlayerIndex, setCurrentPlayerIndex] = useState<number>(0)
     const [currentPlayer, setCurrentPlayer] = useState<Player>({playerId : -1,playerColor:"red",boardId : -1,playerName : "", userId:-1})
-    const [currentUser, setCurrentUser] = useState<User>({userId : -1,name:"Test",displayName: ""})
+    const [currentUser, setCurrentUser] = useState<User>({userId : -1,name:"Test",displayName: "", gameId:-1})
     const [spaces, setSpaces] = useState<Space[][]>([])
     const [width, setWidth] = useState<number>(0)
     const [height, setHeight] = useState<number>(0)
@@ -115,31 +115,29 @@ const GameContextProvider = ({children}: GameContextProviderPropsType) => {
         
     }, [currentPlayerIndex, gameId, playerCount, players])
 
-    const selectGame = useCallback(async (game:Game) => {
+    const selectGame = async (game:Game) => {
         setGameId(game.gameId)
-        GameApi.getBoard(game.gameId).then(board=> {
-            setSpaces(board.spaceDtos)
-            setPlayers(board.playerDtos)
-            setWidth(board.width)
-            setHeight(board.height)
-            setGameId(board.boardId)
-            setGameName(board.boardName)
-            if(board.currentPlayerDto){
-                setCurrentPlayer(board.currentPlayerDto)
-                board.playerDtos.forEach((player,index)=>{
-                    if(player.playerId === board.currentPlayerDto?.playerId){
-                        setCurrentPlayerIndex(index)
-                    }
-                })
-            }
-            setLoaded(true)
-        }).catch(()=> {
-            console.error("Error while fetching board from backend")
-        })
-    }, [])
+        /* GameApi.getBoard(game.gameId).then(board=> {
+             setSpaces(board.spaceDtos)
+             setPlayers(board.playerDtos)
+             setWidth(board.width)
+             setHeight(board.height)
+             setGameId(board.boardId)
+             setGameName(board.boardName)
+             if(board.currentPlayerDto){
+                 setCurrentPlayer(board.currentPlayerDto)
+                 board.playerDtos.forEach((player,index)=>{
+                     if(player.playerId === board.currentPlayerDto?.playerId){
+                         setCurrentPlayerIndex(index)
+                     }
+                 })
+             }*/
+        setLoaded(true)
+    }
 
     const unselectGame = useCallback(async () => {
         setLoaded(false)
+        setGameId(0)
     }, [])
 
 
@@ -189,6 +187,7 @@ const GameContextProvider = ({children}: GameContextProviderPropsType) => {
                     validateUser: ValidateUser,
                     joinAsUser: joinAsUser,
                     currentUser: currentUser,
+                    currentPlayer: currentPlayer,
                     addPlayer: addPlayer,
                     gamesLoaded,
                     loaded: loaded,
