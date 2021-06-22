@@ -116,6 +116,7 @@ const GameContextProvider = ({children}: GameContextProviderPropsType) => {
     }, [currentPlayerIndex, gameId, playerCount, players])
 
     const selectGame = useCallback(async (game:Game) => {
+        setGameId(game.gameId)
         GameApi.getBoard(game.gameId).then(board=> {
             setSpaces(board.spaceDtos)
             setPlayers(board.playerDtos)

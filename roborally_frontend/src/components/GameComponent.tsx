@@ -15,7 +15,6 @@ export const GameComponent: FunctionComponent<GameComponentProps> = ({game}) => 
     const [playerColor, setPlayerColor] = useState<string>("Red")
 
     const onClickGame = async () => {
-        debugger;
         await selectGame(game)
     }
     const onJoinGame = async () => {

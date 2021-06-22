@@ -25,19 +25,19 @@ $width: 75px;
   width: $width / 2;
 }
 
-.redPlayer {
+.redPlayer, .RedPlayer {
   @include player(red)
 }
 
-.greenPlayer {
+.greenPlayer, .GreenPlayer {
   @include player(green)
 }
 
-.yellowPlayer {
+.yellowPlayer, .YellowPlayer {
   @include player(yellow)
 }
 
-.bluePlayer {
+.bluePlayer,  .BluePlayer{
   @include player(blue)
 }
 
