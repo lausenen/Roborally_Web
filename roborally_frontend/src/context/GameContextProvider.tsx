@@ -17,7 +17,6 @@ const GameContextProvider = ({children}: GameContextProviderPropsType) => {
     const [loaded, setLoaded] = useState<boolean>(false)
     const [gamesLoaded, setGamesLoaded] = useState<boolean>(false)
     const [gameId, setGameId] = useState<number>(0)
-
     useEffect(() => {
         const interval = setInterval(load, 5000)
         load()
@@ -42,9 +41,10 @@ const GameContextProvider = ({children}: GameContextProviderPropsType) => {
 
 
 
+
     const load = async () => {
         if (loaded && gameId >= 0) {
-            GameApi.getBoard(gameId).then(board => {
+            await GameApi.getBoard(gameId).then(board => {
                 if (gameId === board.boardId) {
 
                     setSpaces(board.spaceDtos)
@@ -116,6 +116,7 @@ const GameContextProvider = ({children}: GameContextProviderPropsType) => {
     }, [currentPlayerIndex, gameId, playerCount, players])
 
     const selectGame = async (game:Game) => {
+        if(game.users.length >=2){
         setGameId(game.gameId)
         /* GameApi.getBoard(game.gameId).then(board=> {
              setSpaces(board.spaceDtos)
@@ -132,13 +133,15 @@ const GameContextProvider = ({children}: GameContextProviderPropsType) => {
                      }
                  })
              }*/
-        setLoaded(true)
+        setLoaded(true)}
     }
 
-    const unselectGame = useCallback(async () => {
+    const unselectGame = async () => {
         setLoaded(false)
         setGameId(0)
-    }, [])
+    }
+
+
 
 
     const board = useMemo<Board>(() => {
@@ -168,7 +171,6 @@ const GameContextProvider = ({children}: GameContextProviderPropsType) => {
         })
         if(game.users.length != game.numberOfUsers && sameName === false){
         await GameApi.joinAsUser(game.gameId,currentUser)
-        setGames(games)
         }
     }
 

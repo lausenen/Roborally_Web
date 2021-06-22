@@ -5,4 +5,5 @@ public class User {
     public java.lang.Integer userId;
     public String name;
     public String displayName;
+    public Integer gameId;
 }

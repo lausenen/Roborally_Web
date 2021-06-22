@@ -49,6 +49,13 @@ public ResponseEntity<java.lang.Integer> createGame(@RequestBody GameDto gameDto
         return new ResponseEntity<>(dtoMapper.convertToDto(gameAdminService.getGame(gameId)),HttpStatus.OK);
     }
 
+    @PutMapping("/game/{gameId}/leave")
+    public ResponseEntity<GameDto> leaveAsUser(@PathVariable("gameId") int gameId,@RequestBody UserDto userDto) throws ServiceException, DaoException, MappingException {
+        User user = dtoMapper.convertToEntity(userDto);
+        gameAdminService.leaveAsUser(user, gameId);
+        return new ResponseEntity<>(dtoMapper.convertToDto(gameAdminService.getGame(gameId)),HttpStatus.OK);
+    }
+
     @PostMapping("/user")
     public ResponseEntity<java.lang.Integer> createUser(@RequestBody UserDto userDto) throws ServiceException, MappingException, DaoException {
         if(userDto.getName().trim().isEmpty()){

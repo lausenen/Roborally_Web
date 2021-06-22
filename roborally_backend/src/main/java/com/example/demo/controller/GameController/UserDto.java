@@ -4,6 +4,7 @@ public class UserDto {
     public Integer userId;
     public String name;
     public String displayName;
+    public Integer gameId;
 
     public Integer getUserId() {
         return userId;
@@ -27,5 +28,13 @@ public class UserDto {
 
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
+    }
+
+    public Integer getGameId() {
+        return gameId;
+    }
+
+    public void setGameId(Integer gameId) {
+        this.gameId = gameId;
     }
 }

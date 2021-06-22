@@ -13,8 +13,8 @@ const BoardComponent: FunctionComponent<BoardComponentProps> = () => {
     const {board, loaded} = useContext(GameContext) //Hook form of Context.Consumer, used to access the context
     const {unselectGame} = useContext(GameContext)
 
-    const onClickTitle = async () => {
-         await unselectGame()
+    const onClickTitle =  () => {
+        unselectGame()
     }
     return (
 

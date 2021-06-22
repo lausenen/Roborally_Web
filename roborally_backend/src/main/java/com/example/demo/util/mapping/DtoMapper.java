@@ -157,6 +157,7 @@ public GameDto convertToDto(Game game) throws MappingException{
         user.name = userDto.name;
         user.displayName = userDto.displayName;
         user.userId = userDto.userId;
+        user.gameId = userDto.getGameId();
 
         return user;
     }

@@ -31,6 +31,12 @@ class GameApi{
         )
     }
 
+    public leaveAsUser(gameId:number, user:User){
+        return axios.put<Game>(`${this.BACKEND_URL}/game/${gameId}/leave`,user).then(
+            value => value.data
+        )
+    }
+
     public validateUser(name: string){
         return axios.get<User>(`${this.BACKEND_URL}/user`, {params:{name: name}}).then(
             value => value.data

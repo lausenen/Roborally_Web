@@ -57,4 +57,13 @@ public class Game {
     public void addUser(User user) {
         this.users.add(user);
     }
+
+    public void removeUser(User user) {
+        for (User user1: users
+             ) {
+            if(user1.userId.intValue()==user.userId.intValue()){
+                users.remove(user1);
+            }
+        }
+    }
 }
