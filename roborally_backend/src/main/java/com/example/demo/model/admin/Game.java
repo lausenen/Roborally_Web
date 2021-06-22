@@ -7,11 +7,11 @@ public class Game {
 
     public String name;
 
-    public Integer gameId;
+    public java.lang.Integer gameId;
 
     public boolean started;
 
-    public Integer numberOfUsers;
+    public java.lang.Integer numberOfUsers;
 
     public List<User> users = new ArrayList<>();
 
@@ -23,11 +23,11 @@ public class Game {
         this.name = name;
     }
 
-    public Integer getGameId() {
+    public java.lang.Integer getGameId() {
         return gameId;
     }
 
-    public void setGameId(Integer gameId) {
+    public void setGameId(java.lang.Integer gameId) {
         this.gameId = gameId;
     }
 
@@ -39,11 +39,11 @@ public class Game {
         this.started = started;
     }
 
-    public Integer getNumberOfUsers() {
+    public java.lang.Integer getNumberOfUsers() {
         return numberOfUsers;
     }
 
-    public void setNumberOfUsers(Integer numberOfUsers) {
+    public void setNumberOfUsers(java.lang.Integer numberOfUsers) {
         this.numberOfUsers = numberOfUsers;
     }
 

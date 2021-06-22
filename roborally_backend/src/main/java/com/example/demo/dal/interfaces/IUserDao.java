@@ -5,7 +5,6 @@ import com.example.demo.exceptions.ServiceException;
 import com.example.demo.model.admin.User;
 
 import java.util.Collection;
-import java.util.List;
 
 public interface IUserDao  {
     Collection<User> getUsers() throws DaoException, ServiceException;

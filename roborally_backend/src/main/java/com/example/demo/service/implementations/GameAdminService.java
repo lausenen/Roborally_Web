@@ -1,21 +1,17 @@
 package com.example.demo.service.implementations;
 
-import com.example.demo.dal.implementations.UserDao;
 import com.example.demo.dal.interfaces.IBoardDao;
 import com.example.demo.dal.interfaces.IGameDao;
 import com.example.demo.dal.interfaces.IUserDao;
 import com.example.demo.exceptions.DaoException;
 import com.example.demo.exceptions.ServiceException;
-import com.example.demo.model.Board;
-import com.example.demo.model.Player;
 import com.example.demo.model.admin.Game;
 import com.example.demo.model.admin.User;
 import com.example.demo.service.interfaces.IGameAdminService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+
 @Service
 public class GameAdminService implements IGameAdminService {
     private final IBoardDao boardDao;

@@ -3,17 +3,16 @@ package com.example.demo.dal.implementations;
 import com.example.demo.dal.interfaces.IUserDao;
 import com.example.demo.exceptions.DaoException;
 import com.example.demo.exceptions.ServiceException;
-import com.example.demo.model.admin.Game;
 import com.example.demo.model.admin.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
+
 @Repository
 public class UserDao implements IUserDao {
 
-    static final HashMap<Integer, User> users = new HashMap<>();
+    static final HashMap<java.lang.Integer, User> users = new HashMap<>();
     static private int userIdCounter = 0;
 
     @Override
@@ -24,7 +23,7 @@ public class UserDao implements IUserDao {
     @Override
     public void createUser(User user) throws DaoException, ServiceException {
             if(user!= null){
-                Integer userId = user.userId;
+                java.lang.Integer userId = user.userId;
                 if(userId != null) {
                     return;
                 }

@@ -59,6 +59,7 @@ const GamesComponent: FunctionComponent<GamesComponentProps> = () => {
 
 
                 </div>
+                    <br/>
                     <h2>Create New Game</h2>
                     <label>Name Of Game: &nbsp;
                         <input type="text" value={nameOfGame}  onChange={event => setNameOfGame(event.target.value)}/>

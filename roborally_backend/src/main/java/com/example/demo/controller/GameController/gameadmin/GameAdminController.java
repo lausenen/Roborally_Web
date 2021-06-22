@@ -1,25 +1,19 @@
 package com.example.demo.controller.GameController.gameadmin;
 
-import com.example.demo.controller.GameController.BoardDto;
 import com.example.demo.controller.GameController.GameDto;
-import com.example.demo.controller.GameController.SpaceDto;
 import com.example.demo.controller.GameController.UserDto;
 import com.example.demo.exceptions.DaoException;
 import com.example.demo.exceptions.MappingException;
 import com.example.demo.exceptions.ServiceException;
-import com.example.demo.model.Board;
-import com.example.demo.model.Space;
 import com.example.demo.model.admin.Game;
 import com.example.demo.model.admin.User;
 import com.example.demo.service.interfaces.IGameAdminService;
-import com.example.demo.util.mapping.DtoMapper;
 import com.example.demo.util.mapping.IDtoMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
-import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -34,7 +28,7 @@ private final IDtoMapper dtoMapper;
 
     }
     @PostMapping("/game")
-public ResponseEntity<Integer> createGame(@RequestBody GameDto gameDto) throws ServiceException, MappingException, DaoException {
+public ResponseEntity<java.lang.Integer> createGame(@RequestBody GameDto gameDto) throws ServiceException, MappingException, DaoException {
         if(gameDto.gameId != null){
             return new ResponseEntity<>(0, HttpStatus.BAD_REQUEST);
         }
@@ -56,7 +50,7 @@ public ResponseEntity<Integer> createGame(@RequestBody GameDto gameDto) throws S
     }
 
     @PostMapping("/user")
-    public ResponseEntity<Integer> createUser(@RequestBody UserDto userDto) throws ServiceException, MappingException, DaoException {
+    public ResponseEntity<java.lang.Integer> createUser(@RequestBody UserDto userDto) throws ServiceException, MappingException, DaoException {
         if(userDto.getName().trim().isEmpty()){
             return new ResponseEntity<>(0, HttpStatus.BAD_REQUEST);
         }

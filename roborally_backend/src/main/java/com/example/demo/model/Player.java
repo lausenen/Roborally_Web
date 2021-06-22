@@ -21,6 +21,7 @@
  */
 package com.example.demo.model;
 
+import com.example.demo.model.admin.User;
 import org.jetbrains.annotations.NotNull;
 
 import static com.example.demo.model.Heading.SOUTH;
@@ -38,16 +39,18 @@ public class Player {
     private int playerId;
     private String name;
     private String color;
+    private Integer userId;
     private Space space;
     private Heading heading = SOUTH;
 
     private CommandCardField[] program;
     private CommandCardField[] cards;
 
-    public Player(@NotNull Board board, String color, @NotNull String name) {
+    public Player(@NotNull Board board, String color, @NotNull String name, Integer userId) {
         this.board = board;
         this.name = name;
         this.color = color;
+        this.userId = userId;
 
         this.space = null;
 
@@ -123,5 +126,13 @@ public class Player {
 
     public void setPlayerId(int playerId) {
         this.playerId = playerId;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }

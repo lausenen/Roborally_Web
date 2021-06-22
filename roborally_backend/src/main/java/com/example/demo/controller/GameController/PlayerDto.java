@@ -5,6 +5,7 @@ public class PlayerDto {
     private Integer playerId;
     private String playerName;
     private String playerColor;
+    private Integer userId;
     private Integer x;
     private Integer y;
 
@@ -54,5 +55,13 @@ public class PlayerDto {
 
     public void setY(Integer y) {
         this.y = y;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }

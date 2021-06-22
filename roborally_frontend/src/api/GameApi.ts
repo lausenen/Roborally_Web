@@ -52,14 +52,14 @@ class GameApi{
             users: []
         }
 
-        this.createBoard(width, height);
+        this.createBoard(nameOfGame,width, height);
         return axios.post<number>(`${this.BACKEND_URL}/game/`, game).then(value =>value.data)
     }
 
-    public createBoard(width:number, height:number){
+    public createBoard(nameOfGame:string,width:number, height:number){
         const board = {//game object
             boardId : -1,
-            boardName : "TestBoard",
+            boardName : nameOfGame,
             height : height,
             width : width,
         }
@@ -76,6 +76,16 @@ class GameApi{
 
     public switchPlayer(boardId : number){
         return axios.put(`${this.BACKEND_URL}/board/${boardId}/switchplayer`)
+    }
+    public addPlayer(playerName:string,playerColor:string,boardId:number,user:User){
+        debugger;
+        const playerDto = {
+            playerName: playerName,
+            playerColor: playerColor,
+            boardId: boardId,
+            userId: user.userId
+        }
+        return axios.post(`${this.BACKEND_URL}/board/${boardId}/player`, playerDto)
     }
 }
 

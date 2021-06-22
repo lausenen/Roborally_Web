@@ -33,11 +33,8 @@ const GameContextProvider = ({children}: GameContextProviderPropsType) => {
     const [games, setGames] = useState<Game[]>([])
     const playerCount = useMemo(() => players.length, [players])
     const [currentPlayerIndex, setCurrentPlayerIndex] = useState<number>(0)
-    const [currentPlayer, setCurrentPlayer] = useState<Player>({playerId : -1,playerColor:"red",boardId : -1,playerName : ""})
+    const [currentPlayer, setCurrentPlayer] = useState<Player>({playerId : -1,playerColor:"red",boardId : -1,playerName : "", userId:-1})
     const [currentUser, setCurrentUser] = useState<User>({userId : -1,name:"Test",displayName: ""})
-/*    const [currentUserId, setCurrentUserId] = useState<number>(-1)
-    const [currentUserName, setCurrentUserName] = useState<string>("Test")
-    const [currentUserDisplayName, setCurrentUserDisplayName] = useState<string>("Test")*/
     const [spaces, setSpaces] = useState<Space[][]>([])
     const [width, setWidth] = useState<number>(0)
     const [height, setHeight] = useState<number>(0)
@@ -164,7 +161,6 @@ const GameContextProvider = ({children}: GameContextProviderPropsType) => {
 
     }
     const joinAsUser = async (game:Game) =>{
-        debugger;
         let sameName = false
         game.users.forEach(function (user) {
             if(user.name === currentUser.name){
@@ -176,6 +172,8 @@ const GameContextProvider = ({children}: GameContextProviderPropsType) => {
         setGames(games)
         }
     }
+
+    const  addPlayer = (playerName:string,playerColor:string,boardId:number,user:User) => {GameApi.addPlayer(playerName,playerColor,boardId,user)}
 
 
 
@@ -190,6 +188,7 @@ const GameContextProvider = ({children}: GameContextProviderPropsType) => {
                     validateUser: ValidateUser,
                     joinAsUser: joinAsUser,
                     currentUser: currentUser,
+                    addPlayer: addPlayer,
                     gamesLoaded,
                     loaded: loaded,
                     board: board,

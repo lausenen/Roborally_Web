@@ -7,22 +7,22 @@ import java.util.List;
 
 public class GameDto {
     public String name;
-    public Integer gameId;
+    public java.lang.Integer gameId;
     public boolean started;
-    public Integer numberOfUsers;
-    public Integer width;
-    public Integer height;
+    public java.lang.Integer numberOfUsers;
+    public java.lang.Integer width;
+    public java.lang.Integer height;
     public List<User> users = new ArrayList<>();
 
     public String getName() {
         return name;
     }
 
-    public Integer getNumberOfUsers() {
+    public java.lang.Integer getNumberOfUsers() {
         return numberOfUsers;
     }
 
-    public void setNumberOfUsers(Integer numberOfUsers) {
+    public void setNumberOfUsers(java.lang.Integer numberOfUsers) {
         this.numberOfUsers = numberOfUsers;
     }
 

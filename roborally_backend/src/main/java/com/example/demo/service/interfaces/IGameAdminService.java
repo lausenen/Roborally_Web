@@ -6,7 +6,6 @@ import com.example.demo.model.admin.Game;
 import com.example.demo.model.admin.User;
 
 import java.util.Collection;
-import java.util.List;
 
 public interface IGameAdminService {
     Collection<Game> getGames() throws ServiceException, DaoException;

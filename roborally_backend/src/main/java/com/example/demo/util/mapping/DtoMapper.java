@@ -27,6 +27,7 @@ public class DtoMapper implements IDtoMapper {
         playerDto.setPlayerId(player.getPlayerId());
         playerDto.setPlayerName(player.getName());
         playerDto.setPlayerColor(player.getColor());
+        playerDto.setUserId(player.getUserId());
 
         if (player.getSpace() != null) {
             playerDto.setX(player.getSpace().x);
@@ -126,7 +127,7 @@ public GameDto convertToDto(Game game) throws MappingException{
             throw new MappingException("Board was null when trying to convert PlayerDto to Player");
         }
         if (playerDto.getPlayerId() == null) { //If we have not provided a player id, we are creating a new player
-            return new Player(board, playerDto.getPlayerColor(), playerDto.getPlayerName());
+            return new Player(board, playerDto.getPlayerColor(), playerDto.getPlayerName(), playerDto.getUserId());
         }
         return null;
     }
